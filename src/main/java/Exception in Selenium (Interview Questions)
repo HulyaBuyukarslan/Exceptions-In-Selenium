@@ -1,0 +1,145 @@
+
+Interview Questions
+Tell me 5 exception that you get.-5 adet selenium da aldigin exceptions dan bahset.
+What type of exceptions do you get in selenium? - Seleniumda ki align exceptions tiplerinden bahset
+What is your solution?-Cozum ne?
+What type of waits do you use?- Hangi resit wait kullanirsin?
+Which wait do you prefer?- Hangi wait tercih edersin?
+Why do you prefer that wait?- Neden onu tercih edersin?
+How to you resolve synronization issue?-Senkronizasyon problemini nasil cozersin?
+
+
+NoSuchElementException***                   *** Selenium'da önemli olan exceptionlar
+TimeOutException***
+NullPointerException***
+InvalidSelectorException
+StaleElementReferenceException***
+InvalidElementStateException
+WebDriverException***
+ElementNotInteractableException
+ElementClickInterceptedException
+InvalidArgumentException
+JavascriptException
+RemoteDriverServerException
+
+
+-------- 1 -----------
+NoSuchElementException:
+Yanlis locator
+Popup, yeni pencere, iframe,…
+Sayfa dolmada problemler ve yavaslamalar
+Sakli olan elementler
+Solution:
+Locatorin dogrulugunu tekrar kontrol et
+Manual test ile iframe, yeni pencere, alert,… gibi elementlerin varligini kontrol et.
+Bekleme problemi olabilir. Implicit wait bekleme suresini cozmuyor. Bu durumda explicit wait yada fluent wait kullaniriz
+
+
+------- 2 ------
+TimeOutException:
+If you use explicit wait and wait time is not enough/locator still incorrect then TimeOutException
+Simply put, wait time is over but the commend is not completed
+Solution:
+-Increase the wait time
+-Try using different wait. For example try using javascript executor wait for the page to load. This is also a dynamic wait
+-I have different explicit waits in my Reusable util class. I have javascript executor wait as well. ReusableMethods.waitForPageToLoad(1);
+-Case by case, I prefer different explicit waits to maximize the performance of the automation script
+
+
+TimeOutException:
+Explicit wait kullanildiginda, ve element bulunamadiginda alinir.
+Explicit wait & yanlis locator-> timeout
+Explicit wait & doğru locator & sure yeterli degil -> timeout
+Explicit wait & dogru locator & sure yeterli & iframe var ->  time out
+Solution:
+-Sureyi arttirmak
+-Farkli explicit kullanmak: wait visibilityOfElementLocated YERINE presenceOfElementLocated. Yada javascript executor da ki waiter sayfa geçişlerini beklemek icin kullanabilirim
+-Locatori tekrar kontrol etmek
+-Frameworkunde hazir reusable method lar var Bu durumda timeoutexception aldigimda hızlıca o metotlar yardımıyla problemi cozebiliyoruz
+
+
+------ 3 -----------
+NullPointerException
+When a variable is created, but not instantiated, when pointer does not show any value then we get NullPointerException.
+It is common to initialize the Driver, they we get the extaction. Driver driver; but never use driver=new ChromeDriver()
+For example, in my page object model, I create page objects in test classes but when I forgot to use new keyword to instantiate, then I get the exception
+Solution:
+Instantiate the variable
+
+
+NullPointerException
+Degiskenleri oluşturup instantiate etmediğimizde alırız(new kelimesini kullanmadigimizda)
+Ornegin WebDriver driver; deyip = new ChromeDriver() demezisek null pointer exception aliriz
+Solution:
+Degiskeni instantiate et
+
+declared but not instatntiated = nullpointer exc.
+
+
+----------- 4 ---------------
+Stale Element means the element is no longer fresh. It is old and no longer available
+When the element is no longer fresh on the page and you try to use it
+When the element is detached from the DOM
+When the element is removed after session started
+Solution:
+Relocate the same element again. You can use a new variable name as well.
+
+
+
+Stale Element = eski, kullanılamaz durumda, kullanım artık elverişli degil
+-Sayfayi yenilediğinizde (refresh())
+-Sayfada ileri geri gittimizde
+COZUM:
+Elementi tekrar bulmak
+
+
+----------- 5 -------------
+WebDriverException
+Driver versiyonları ve browser versiyonları ayni veya yakin olmadiginda alinir
+Driver(Browser) kapattikdan sonra tekrar kullanmak istediğiniz durumlarda alınabilir.
+
+
+WebDriverException
+When you close the browser, but still want to use that in correctly
+When the versions of the driver and browsers are not compatible
+Solution
+Your design should be good. We should use singleton Driver to prevent this exception
+Keep drivers up to date that is compatible with the  browser version
+
+
+----------- INTERVİEW QESTIONS --------------
+Tell me 5 exception that you get/What type of exceptions do you get in selenium?
+Null pointer, no such element, time out, slate element reference, web driver
+What is your solution?
+Read the error message and learn what is the error and where it is.
+In general, error happens because of the timing issue, wrong locator, or iframe/windows/alerts
+Each error has specific solutions but in general, I debug my code, and do some research then execute the code one more time after the fix.
+What type of waits do you use?
+I use implicit or explicit wait
+Which wait do you prefer?
+Explicit wait works better in some cases. When I use explicit wait, and still see timeout exception, then then there can be other issues such as incorrect locators.
+Why do you prefer that wait?
+I already have implicit wait in my Driver class, but I prefer explicit wait when I need to use an expected condition such as element is not visible.
+How do you resolve synronization issue?
+I use implicit or explicit wait. In my driver class, I already have implicit wait, that handles most of the wait issues, but when it is not enough than I use explicit wait.
+
+
+
+Seleniumda aldigin 5 exception
+Null pointer, no such element, time out, slale element reference, web driver
+Genel olarak exception aldiginda bozum yolun nedir?
+Hata mesajini oku
+Genel olarak zamanlama, yanlis locator, iframe hataları olabiliyor
+Hata mesajina gore exception I cozdukden sonra tekrar kodumu calistirim
+Selniumda kullandigin waitler nelerdir>
+Implicit yada explicit yada fluent
+Hangi waiti tercih edersin?
+Test Base (Driver sinifinda) implicit wait kullanıyorum. Cogu problemi bozuyor Cozemedigi durumlarda explicit wait kullanıyorum.
+Neden Explicit wait?
+Explicit wait element e ouzel yazilabilir. Yerel cozum gerektiğinde explicit wait I kullanmak zorundayiz.
+Senkronize(bekleme) problemlerini nasıl çözersin
+Selenium waitlerini kullanarak. Implicit wait driver im da var, ama yetmedigi durumlarda explicit wait kullanirim. Bu yüzden ReusableMethod sinifimda tekrar tekrar kullanabileceğimiz explicit wait method lari var. Kolaylıkla explicit wait ile bekleme problemlerini cozebuliyoruz.
+
+
+
+
